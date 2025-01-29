@@ -1,29 +1,20 @@
 #include "contact.hpp"
 #include <iostream>
-#include <sstream>
-#include <iomanip>
+#include <string>
 
-std::string formatField(const std::string& field) {
-	std::cout << field;
-    // If the field is longer than 10 characters, truncate and add a '.'
-    if (field.size() > 10) {
-        return field.substr(0, 9) + ".";
-    }
 
-    // Otherwise, right-align using stream manipulators
-    std::ostringstream oss;
-    oss << std::setw(10) << field;
-    return oss.str();
+void	Contact::setIndex(int i)
+{
+	id = i;
 }
 
 void Contact::printInfo() {
     
 	std::string idStr = std::to_string(id);
-    std::cout
-        << formatField(idStr)       << "|"
-        << formatField(name) << "|"
-        << formatField(surname) << "|"
-        << formatField(nickname) << std::endl;
+	std::cout.width(10); std::cout << std::right << idStr << '|';
+	std::cout.width(10); std::cout << std::right << name << '|';
+	std::cout.width(10); std::cout << std::right << nickname << '|';
+	std::cout.width(10); std::cout << std::right << surname << '|';
 }
 
 void Contact::printAll() {

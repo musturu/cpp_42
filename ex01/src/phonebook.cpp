@@ -32,26 +32,32 @@ void Phonebook::add()
 	for (int i = len; i >= 1; i--)
 	{
 		contacs[i] = contacs[i - 1];
+		contacs[i].setIndex(i);
 	}
 	contacs[0] = Contact(name, surname, nickname, phonenumber, secret, len);
+	contacs[0].setIndex(0);
 	len++;
-	contacs[0].printAll();
-	/*printf("len=%s\n", len);*/
 }
 
 void Phonebook::search()
 {
 	int	index;
 
+
+	std::cout.width(10); std::cout << std::right << "ID" << '|';
+	std::cout.width(10); std::cout << std::right << "NAME" << '|';
+	std::cout.width(10); std::cout << std::right << "NICKNAME" << '|';
+	std::cout.width(10); std::cout << std::right << "SURNAME" << "|\n";
 	for (int i = 0; i < len; i++)
 	{
 		contacs[i].printInfo();
+		std::cout << "|\n";
 	}
 
 	std::cout << "\nenter INDEX:";
 	std::cin >> index;
 
-	if (index < len && index > 0)
+	if (index < len && index >= 0)
 		contacs[index].printAll();
 	else
 		std::cout << "INVALID INDEX\n";

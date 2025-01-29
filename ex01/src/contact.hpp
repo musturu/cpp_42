@@ -24,6 +24,7 @@ public:
 	void		printInfo();
 	void		printAll();
 	
+	void			setIndex(int i);
 	//constructors	
 	Contact();
 	Contact(std::string name, std::string surname, std::string nickname,
