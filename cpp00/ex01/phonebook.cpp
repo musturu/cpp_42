@@ -3,6 +3,7 @@
 #include <cstdio>
 #include <string>
 #include <iostream>
+#include <cstdlib>
 
 Phonebook::Phonebook()
 {
@@ -20,7 +21,7 @@ void Phonebook::add()
 	std::string dummy;
 
 	if (this->len == 7)
-		std::cout << "Warning: you're about to ovewrite " << this->contacs[this->len].getName() << std::endl;
+		std::cout << "Warning: you're about to ovewrite " << this->contacs[this->len-1].getName() << std::endl;
 	std::cout << "enter NAME:";
 	std::cin >> name;
 	std::cout << "enter SURNAME:";
@@ -43,11 +44,13 @@ void Phonebook::add()
 	std::getline(std::cin, dummy);
 }
 
+
 void Phonebook::search()
 {
-	int	index;
+	std::string	indexstr;
+	int			index;
 	std::string dummy;
-	
+
 	std::cout.width(10); std::cout << std::right << "ID" << '|';
 	std::cout.width(10); std::cout << std::right << "NAME" << '|';
 	std::cout.width(10); std::cout << std::right << "NICKNAME" << '|';
@@ -58,14 +61,14 @@ void Phonebook::search()
 		std::cout << "|\n";
 	}
 
-	std::cout << "\nenter INDEX:";
-	std::cin >> index;
+	std::cout << "enter INDEX:";
+	std::cin >> indexstr;
 
-	if (index < len && index >= 0)
+	index = std::atoi(indexstr.c_str());
+	if (index < len && isdigit(indexstr[0]))
 		contacs[index].printAll();
 	else
 		std::cout << "INVALID INDEX\n";
 	std::getline(std::cin, dummy);
 	std::cin.clear();
 }
-

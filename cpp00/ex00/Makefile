@@ -1,9 +1,9 @@
 NAME = megaphone
 CC = g++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
-SRC_DIR = ./
+SRC_DIR = .
 OBJ_DIR = obj
-SRCS = $(wildcard $(SRC_DIR)/*.cpp)
+SRCS = megaphone.cpp
 OBJS = $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 
 all: $(NAME)

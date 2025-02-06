@@ -6,20 +6,26 @@
 
 std::string Contact::getName()
 {
-	return (this->name);
+	return (name);
 }
 
 void	Contact::setIndex(int i)
 {
 	id = i;
 }
+std::string truncateString(const std::string &str) {
+    if (str.length() > 10) {
+        return str.substr(0, 9) + ".";
+    }
+    return str;
+}
 
 void Contact::printInfo() {
-    
+
 	std::cout.width(10); std::cout << std::right << id << '|';
-	std::cout.width(10); std::cout << std::right << name << '|';
-	std::cout.width(10); std::cout << std::right << nickname << '|';
-	std::cout.width(10); std::cout << std::right << surname << '|';
+	std::cout.width(10); std::cout << std::right << truncateString(name) << '|';
+	std::cout.width(10); std::cout << std::right << truncateString(nickname) << '|';
+	std::cout.width(10); std::cout << std::right << truncateString(surname);
 }
 
 void Contact::printAll() {

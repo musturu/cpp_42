@@ -1,7 +1,7 @@
-NAME = program
+NAME = phonebook
 CC = g++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
-SRC_DIR = src
+SRC_DIR = .
 OBJ_DIR = obj
 SRCS = $(wildcard $(SRC_DIR)/*.cpp)
 OBJS = $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
