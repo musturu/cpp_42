@@ -1,4 +1,7 @@
 #include "contact.hpp"
+#ifndef __PHONEBOOK_H__
+#define __PHONEBOOK_H__
+
 
 class Phonebook {
 
@@ -12,3 +15,5 @@ public:
 	void		search();
 	Phonebook();
 };
+
+#endif

@@ -1,6 +1,7 @@
 #include <string>
-#ifndef CONTACT
-# define CONTACT
+#ifndef __CONTACT_H__
+#define __CONTACT_H__
+
 
 
 class Contact {
@@ -13,7 +14,7 @@ private:
 	std::string secret;
 	std::string phonenumber;
 public:
-	
+
 	//getter
 	std::string getName();
 	std::string getNickName();
@@ -23,9 +24,9 @@ public:
 	std::string getSurname();
 	void		printInfo();
 	void		printAll();
-	
+
 	void			setIndex(int i);
-	//constructors	
+	//constructors
 	Contact();
 	Contact(std::string name, std::string surname, std::string nickname,
 		 std::string phonenumber, std::string secret, int id);
