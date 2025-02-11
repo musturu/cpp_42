@@ -1,9 +1,9 @@
-NAME = BRAIN
+NAME = program
 CC = g++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
-SRC_DIR = .
+SRC_DIR = src
 OBJ_DIR = obj
-SRCS =  main.cpp HumanA.cpp HumanB.cpp Weapon.cpp
+SRCS = main.cpp
 OBJS = $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 
 all: $(NAME)
