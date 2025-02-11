@@ -1,4 +1,4 @@
-NAME = program
+NAME = sed_is_for_losers
 CC = g++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 SRC_DIR = src
