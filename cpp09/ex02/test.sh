@@ -1,5 +1,6 @@
 #!/bin/bash
 
+## COURTESY OF CREA==nihilantropy
 # Colors for better output
 GREEN='\033[0;32m'
 RED='\033[0;31m'
