@@ -9,23 +9,23 @@ int main(int argc, char* argv[]) {
         std::cerr << "Error" << std::endl;
         return 1;
     }
-    std::vector<int> v;
-    std::deque<int> d;
+    std::vector<size_t> v;
+    std::deque<size_t> d;
     for (int i = 1; i < argc; ++i) {
         std::string arg(argv[i]);
         if (!PmergeMe::isValidNumber(arg)) {
             std::cerr << "Error" << std::endl;
             return 1;
         }
-        int num = std::stoi(arg);
-        if (num <= 0) {
+        size_t num = static_cast<size_t>(std::stoul(arg));
+        if (num == 0) {
             std::cerr << "Error" << std::endl;
             return 1;
         }
         v.push_back(num);
         d.push_back(num);
     }
-    run(v, "std::vector");
-    run(d, "std::deque");
+    runVector(v, "std::vector");
+    runDeque(d, "std::deque");
     return 0;
 }

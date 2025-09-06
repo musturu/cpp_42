@@ -3,6 +3,7 @@
 
 #include <string>
 #include <stack>
+#include <list>
 
 class RPN {
 public:

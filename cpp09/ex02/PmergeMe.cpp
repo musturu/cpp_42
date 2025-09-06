@@ -41,3 +41,113 @@ std::vector<size_t> PmergeMe::jacobsthal_sequence(size_t n) {
     }
     return seq;
 }
+
+void PmergeMe::mergeInsertSortVector(std::vector<size_t>& data) {
+    size_t n = data.size();
+    if (n <= 1) return;
+    if (n == 2) {
+        if (data[1] < data[0]) std::swap(data[0], data[1]);
+        return;
+    }
+    std::vector<size_t> main_chain;
+    std::vector<size_t> pend_chain;
+    size_t i = 0;
+    while (i + 1 < n) {
+        if (data[i] < data[i + 1]) {
+            main_chain.push_back(data[i + 1]);
+            pend_chain.push_back(data[i]);
+        } else {
+            main_chain.push_back(data[i]);
+            pend_chain.push_back(data[i + 1]);
+        }
+        i += 2;
+    }
+    if (i < n) pend_chain.push_back(data[i]);
+    mergeInsertSortVector(main_chain);
+    std::vector<size_t> jac_seq = jacobsthal_sequence(pend_chain.size());
+    std::vector<bool> inserted(pend_chain.size(), false);
+    for (size_t idx = 0; idx < pend_chain.size(); ++idx) {
+        size_t j = (idx < jac_seq.size()) ? jac_seq[idx] - 1 : idx;
+        if (j >= pend_chain.size() || inserted[j]) {
+            j = 0;
+            while (j < pend_chain.size() && inserted[j]) ++j;
+            if (j >= pend_chain.size()) break;
+        }
+        auto pos = std::lower_bound(main_chain.begin(), main_chain.end(), pend_chain[j]);
+        main_chain.insert(pos, pend_chain[j]);
+        inserted[j] = true;
+    }
+    data = main_chain;
+}
+
+void PmergeMe::mergeInsertSortDeque(std::deque<size_t>& data) {
+    size_t n = data.size();
+    if (n <= 1) return;
+    if (n == 2) {
+        if (data[1] < data[0]) std::swap(data[0], data[1]);
+        return;
+    }
+    std::deque<size_t> main_chain;
+    std::deque<size_t> pend_chain;
+    size_t i = 0;
+    while (i + 1 < n) {
+        if (data[i] < data[i + 1]) {
+            main_chain.push_back(data[i + 1]);
+            pend_chain.push_back(data[i]);
+        } else {
+            main_chain.push_back(data[i]);
+            pend_chain.push_back(data[i + 1]);
+        }
+        i += 2;
+    }
+    if (i < n) pend_chain.push_back(data[i]);
+    mergeInsertSortDeque(main_chain);
+    std::vector<size_t> jac_seq = jacobsthal_sequence(pend_chain.size());
+    std::vector<bool> inserted(pend_chain.size(), false);
+    for (size_t idx = 0; idx < pend_chain.size(); ++idx) {
+        size_t j = (idx < jac_seq.size()) ? jac_seq[idx] - 1 : idx;
+        if (j >= pend_chain.size() || inserted[j]) {
+            j = 0;
+            while (j < pend_chain.size() && inserted[j]) ++j;
+            if (j >= pend_chain.size()) break;
+        }
+        auto pos = std::lower_bound(main_chain.begin(), main_chain.end(), pend_chain[j]);
+        main_chain.insert(pos, pend_chain[j]);
+        inserted[j] = true;
+    }
+    data = main_chain;
+}
+
+void runVector(const std::vector<size_t>& input, const std::string& containerName) {
+    std::vector<size_t> data = input;
+    std::cout << "Before: ";
+    for (size_t i = 0; i < data.size(); ++i) std::cout << data[i] << " ";
+    std::cout << std::endl;
+    auto start = std::chrono::high_resolution_clock::now();
+    PmergeMe::mergeInsertSortVector(data);
+    auto end = std::chrono::high_resolution_clock::now();
+    std::cout << "After: ";
+    for (size_t i = 0; i < data.size(); ++i) std::cout << data[i] << " ";
+    std::cout << std::endl;
+    double elapsed = std::chrono::duration<double, std::micro>(end - start).count();
+    std::cout << "Time to process a range of " << data.size()
+              << " elements with " << containerName << " : "
+              << elapsed << " us" << std::endl;
+}
+
+void runDeque(const std::deque<size_t>& input, const std::string& containerName) {
+    std::deque<size_t> data = input;
+    std::cout << "Before: ";
+    for (size_t i = 0; i < data.size(); ++i) std::cout << data[i] << " ";
+    std::cout << std::endl;
+    auto start = std::chrono::high_resolution_clock::now();
+    PmergeMe::mergeInsertSortDeque(data);
+    auto end = std::chrono::high_resolution_clock::now();
+    std::cout << "After: ";
+    for (size_t i = 0; i < data.size(); ++i) std::cout << data[i] << " ";
+    std::cout << std::endl;
+    double elapsed = std::chrono::duration<double, std::micro>(end - start).count();
+    std::cout << "Time to process a range of " << data.size()
+              << " elements with " << containerName << " : "
+              << elapsed << " us" << std::endl;
+}

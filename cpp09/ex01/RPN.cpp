@@ -5,8 +5,8 @@
 RPN::RPN() {}
 
 int RPN::evaluate(const std::string& expr) {
-
-    std::stack<int> s;
+    // Use std::list as the underlying container for std::stack (vector, deque, map are forbidden)
+    std::stack<int, std::list<int> > s;
     std::istringstream iss(expr);
     std::string token;
 
